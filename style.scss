@@ -1,0 +1,185 @@
+$cirlceElementBackgroundColor: hsl(215, 18%, 19%);
+$orangeColor: hsl(25, 97%, 53%);
+$submitButtonTextColor: hsl(213, 19%, 18%);
+$bodyBackgroundColor: hsl(216, 12%, 8%);
+$gradientStartColor: hsl(215, 21%, 16%);
+$gradientEndColor: hsl(215, 27%, 12%);
+$descriptionColor: hsl(217, 12%, 63%);
+$whiteColor: hsl(0, 0%, 100%);
+
+@mixin overpass {
+  font-family: "Overpass", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin circle-element {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  background-color: $cirlceElementBackgroundColor;
+  border: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+body {
+  @include flex;
+  @include overpass;
+  width: 100%;
+  height: 100vh;
+  background-color: $bodyBackgroundColor;
+}
+
+
+// rating state styles
+.rating-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2em;
+  width: 25em;
+  height: 60%;
+  margin: 1.5em;
+  padding: 2em 1.5em 2.5em 1.5em;
+  border-radius: 5%;
+  background: linear-gradient(to bottom, $gradientStartColor, $gradientEndColor);
+
+  > * {
+    flex: 1 1 auto;
+  }
+}
+.star-icon {
+  @include flex;
+  @include circle-element;
+  flex: 0 0 auto;
+
+  img {
+    width: 35%;
+    height: 35%;
+    object-fit: cover;
+  }
+}
+.state-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  > * {
+    flex: 1 1 auto;
+  }
+}
+.state-title {
+  color: $whiteColor;
+  font-size: 2em;  
+}
+.state-desc {
+  color: $descriptionColor;
+  font-size: 0.95em;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+.rating-buttons {
+  @include flex;
+  justify-content: space-between;
+
+  li {
+    list-style-type: none;
+  }
+}
+.rating-button {
+  @include flex;
+  @include circle-element;
+  color: $descriptionColor;
+  font-weight: 700;
+
+  &:hover {
+    color: $bodyBackgroundColor;
+    background-color: $orangeColor;
+    cursor: pointer;
+  }
+}
+.submit-button {
+  @include flex;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 3.2em;
+  border: none;
+  border-radius: 1.5em / 50%;
+  background-color: $orangeColor;
+  color: $bodyBackgroundColor;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  &:hover {
+    background-color: $whiteColor;
+    cursor: pointer;
+  }
+}
+.selected {
+  background-color: $whiteColor;
+  color: $bodyBackgroundColor;
+}
+
+// thx you state styles
+.thank-you-state {
+  @extend .rating-state;
+  @include flex;
+  display: none;
+  .state-text {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.2em;
+    margin-top: 1em;
+  }
+}
+.thx-image {
+  width: 10em;
+  height: 5em;
+  margin-top: 0.5em;
+}
+.rating {
+  @include flex;
+  height: 0.75em;
+  border-radius: 50px;
+  margin-top: 0.4em;
+  padding: 0 0.9em;
+  background-color: $cirlceElementBackgroundColor;
+}
+.selected-score {
+  padding-top: 0.2em;
+  color: $orangeColor;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .star-icon, .rating-button {
+    width: 3.5em;
+    height: 3.5em;
+  }
+  .star-icon {
+    margin-bottom: 1em;
+  }
+  .submit-button {
+    margin-top: 0.5em;
+  }
+  .rating-state {
+    width: 28em;
+    height: 50%;
+    padding: 2em 2em 2.5em 2em;
+  }
+  .state-desc {
+    font-size: 1em;
+  }
+}
